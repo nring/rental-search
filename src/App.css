@@ -1,0 +1,33 @@
+
+.app{
+  max-width:60em;
+  margin:0 auto;
+}
+ul {
+  margin:0;
+  padding:0;
+
+}
+li {
+  margin:0;
+  padding:0;
+}
+
+
+.formGroup{
+  margin:0 0 1rem;
+  clear:both;
+}
+.formGroup__label{
+  display:block;
+}
+
+.formGroup--half{
+  width:48%;
+  margin-right:4%;
+  float:left;
+}
+.formGroup--half + .formGroup--half{
+  margin-right:0;
+  clear:none;
+}
