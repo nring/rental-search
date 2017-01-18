@@ -1,0 +1,9 @@
+.resultItem{
+  padding:1rem;
+}
+.resultItem p{
+  margin-top:0;
+}
+.resultItem:nth-child(odd){
+  background:#efefef;
+}

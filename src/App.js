@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
 import FormContainer from './containers/FormContainer';
-import ResultItem from './components/ResultItem';
-import Time from './components/Time';
-import './App.css';
+import ResultsList from './components/ResultsList';
+import './styles/App.css';
 
 class App extends Component {
 
-  getValue() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      results: {}
+    }
 
-    console.log(this);
+    this.setResults = this.setResults.bind(this);
+  }
+
+  setResults(results) {
+    this.setState({ results: results });
   }
 
   render() {
     return (
       <div className="app">
-
-        <FormContainer />
-
-        <ul>
-          <ResultItem />
-        </ul>
+        <h1>Rental Search</h1>
+        <FormContainer
+          onSubmit={this.setResults} />
+        <ResultsList 
+          results={this.state.results} />
       </div>
     );
   }

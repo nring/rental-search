@@ -1,4 +1,7 @@
-
+html, body{
+  margin:0;
+  padding:0;
+}
 .app{
   max-width:60em;
   margin:0 auto;
@@ -13,13 +16,35 @@ li {
   padding:0;
 }
 
+input[type="text"],
+input[type="date"]{
+  border:1px solid #ccc;
+  padding:3px 5px;
+  font-size:1rem;
+}
+.input__location{
+  width:100%;
+}
+.input__time{
+  font-size:1rem;
+  margin-left:0.5rem;
+}
 
+
+h1{
+  text-align:center;
+  background:#111;
+  padding:3rem;
+  color:#fff;
+  margin:0 0 1rem;
+}
 .formGroup{
   margin:0 0 1rem;
   clear:both;
 }
 .formGroup__label{
   display:block;
+  margin:0 0 2px;
 }
 
 .formGroup--half{

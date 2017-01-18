@@ -2,7 +2,7 @@ import React from 'react';
 
 const Location = (props) => (
   <div className="formGroup">
-    <label htmlFor={props.name}>{props.displayName}</label>
+    <label htmlFor={props.name} className="formGroup__label">{props.displayName}</label>
     <input type="text"
       id={props.name}
       className="input__location"

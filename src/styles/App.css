@@ -1,0 +1,30 @@
+*{
+  box-sizing:border-box;
+}
+html, body{
+  margin:0;
+  padding:0;
+}
+.app{
+  max-width:60em;
+  margin:0 auto;
+}
+
+ul, li {
+  margin:0;
+  padding:0;
+  list-style:none;
+  clear:both;
+}
+
+h1{
+  text-align:center;
+  background:#111;
+  padding:3rem;
+  color:#fff;
+  margin:0 0 1rem;
+}
+
+.floatRight{
+  float:right;
+}

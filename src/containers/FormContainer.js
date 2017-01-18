@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import '../styles/Forms.css';
 import Location from '../components/Location';
 import Time from '../components/Time';
 import Date from '../components/Date';
+import Data from '../data/Data.json';
 
 class FormContainer extends Component {
   constructor(props) {
@@ -11,9 +13,10 @@ class FormContainer extends Component {
       timeOptions: [],
       location: '',
       startDate: '',
-      startTime: '',
+      startTime: '00:00',
       endDate: '',
-      endTime: ''
+      endTime: '00:00',
+      results: []
     }
 
     this.handleLocation = this.handleLocation.bind(this);
@@ -26,6 +29,10 @@ class FormContainer extends Component {
   }
 
   componentDidMount() {
+    this.setTimeOptions();
+  }
+
+  setTimeOptions() {
 
     const timeOptions = [];
 
@@ -37,39 +44,52 @@ class FormContainer extends Component {
         timeOptions.push({val: time, name: time})
         // TODO: write out different name values (for 12:00 am, 12:00 pm)
       }
-      timeOptions.push({val: time, name: time});
     }
 
     this.setState({
       timeOptions: timeOptions
-    })
+    });
   }
 
   padNumber(num) {
     return (num < 10 ? '0' : '') + num;
   }
-  handleLocation(event) {  
+  handleLocation(event) {
     this.setState({ location: event.target.value });
   }
   handleStartDate(event) {
-    console.log('Start Date changed');
+    var date = event.target.value.split('-');
+    date = date[1] + '/' + date[2] + '/' + date[0];
+    this.setState({ startDate: date });
   }
   handleStartTime(event) {
-    console.log(event);
+    console.log(event.target.value);
+    this.setState({ startTime: event.target.value });
   }
   handleEndDate(event) {
-    console.log('Start Date changed');
+    var date = event.target.value.split('-');
+    date = date[1] + '/' + date[2] + '/' + date[0];
+    this.setState({ endDate: date });
   }
   handleEndTime(event) {
-    console.log(event);
+    console.log(event.target.value);
+    this.setState({ endTime: event.target.value });
   }
   handleFormSubmit(event) {
     event.preventDefault();
 
-    const endpoint = 'http://api.hotwire.com/v1/search/car?apikey=jguzhrtaw6ucmu2sfnek24vn',
+    /*
+    TODO: Route this through a service to bypass CORS errors
+    TODO: Add a loading indicator
+    var _this = this;
+
+    const endpoint = 'https://api.hotwire.com/v1/search/car?apikey=jguzhrtaw6ucmu2sfnek24vn&format=JSON',
           opts = {
             method: 'GET',
-            mode: 'no-cors'
+            mode: 'cors',
+            headers: {
+             'Content-Type': 'application/x-www-form-urlencoded'
+            }
           },
           params =  '&dest=' + this.state.location +
                     '&startdate=' + this.state.startDate +
@@ -78,9 +98,15 @@ class FormContainer extends Component {
                     '&dropofftime=' + this.state.endTime;
 
     fetch(endpoint + params, opts)
-      .then(function(response){
-        console.log(response);
-      });
+      .then(response => response.json())
+      .then(json => {
+        _this.props.onSubmit(json);
+      })
+      .catch(error => {
+        _this.props.onSubmit({error: error});
+      })
+    */
+      this.props.onSubmit(Data)
   }
 
   render() {
@@ -113,15 +139,17 @@ class FormContainer extends Component {
             name={'endTime'}
             options={this.state.timeOptions}
             changeFunction={this.handleEndTime} />
-        </div>
 
-        <input type="submit" className="btn" value="Search" />
+          <input type="submit" className="btn floatRight" value="Search" />
+        </div>
 
       </form>
     )
   }
+}
 
-
+FormContainer.propTypes = {
+  onSubmit: React.PropTypes.func.isRequired
 }
 
 export default FormContainer;
