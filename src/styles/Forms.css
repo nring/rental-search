@@ -34,4 +34,5 @@ input[type="date"]{
   border:none;
   font-size:1rem;
   color:#fff;
+  padding:.25rem;
 }

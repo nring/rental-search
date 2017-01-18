@@ -63,7 +63,6 @@ class FormContainer extends Component {
     this.setState({ startDate: date });
   }
   handleStartTime(event) {
-    console.log(event.target.value);
     this.setState({ startTime: event.target.value });
   }
   handleEndDate(event) {
@@ -72,7 +71,6 @@ class FormContainer extends Component {
     this.setState({ endDate: date });
   }
   handleEndTime(event) {
-    console.log(event.target.value);
     this.setState({ endTime: event.target.value });
   }
   handleFormSubmit(event) {

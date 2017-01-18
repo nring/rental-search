@@ -12,7 +12,6 @@ class ResultsList extends Component {
     let items = [],
         errors = [];
 
-    console.log(this.props);
     if (this.props.results && this.props.results.Result && this.props.results.Result.length) {
       items = this.props.results.Result;
     } else if (this.props.results && this.props.results.Errors && this.props.results.Errors.length) {
