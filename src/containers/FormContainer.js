@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import fetchJsonp from 'fetch-jsonp';
 import '../styles/Forms.css';
 import Location from '../components/Location';
 import Time from '../components/Time';
 import Date from '../components/Date';
-import Data from '../data/Data.json';
 
 class FormContainer extends Component {
   constructor(props) {
@@ -76,26 +76,17 @@ class FormContainer extends Component {
   handleFormSubmit(event) {
     event.preventDefault();
 
-    /*
-    TODO: Route this through a service to bypass CORS errors
-    TODO: Add a loading indicator
+    // TODO: Add a loading indicator
     var _this = this;
 
-    const endpoint = 'https://api.hotwire.com/v1/search/car?apikey=jguzhrtaw6ucmu2sfnek24vn&format=JSON',
-          opts = {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-             'Content-Type': 'application/x-www-form-urlencoded'
-            }
-          },
+    const endpoint = 'https://api.hotwire.com/v1/search/car?apikey=jguzhrtaw6ucmu2sfnek24vn&format=JSONP',
           params =  '&dest=' + this.state.location +
                     '&startdate=' + this.state.startDate +
                     '&enddate=' + this.state.endDate +
                     '&pickuptime=' + this.state.startTime +
                     '&dropofftime=' + this.state.endTime;
 
-    fetch(endpoint + params, opts)
+    fetchJsonp(endpoint + params)
       .then(response => response.json())
       .then(json => {
         _this.props.onSubmit(json);
@@ -103,8 +94,7 @@ class FormContainer extends Component {
       .catch(error => {
         _this.props.onSubmit({error: error});
       })
-    */
-      this.props.onSubmit(Data)
+
   }
 
   render() {
