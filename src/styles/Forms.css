@@ -4,6 +4,7 @@
 }
 .formGroup__label{
   display:block;
+  font-weight:bold;
   margin:0 0 2px;
 }
 

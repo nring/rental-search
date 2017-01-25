@@ -4,6 +4,7 @@ import '../styles/Forms.css';
 import Location from '../components/Location';
 import Time from '../components/Time';
 import Date from '../components/Date';
+import Moment from 'moment';
 
 class FormContainer extends Component {
   constructor(props) {
@@ -12,9 +13,9 @@ class FormContainer extends Component {
     this.state = {
       timeOptions: [],
       location: '',
-      startDate: '',
+      startDate: Moment(),
       startTime: '00:00',
-      endDate: '',
+      endDate: Moment(),
       endTime: '00:00',
       results: []
     }
@@ -57,17 +58,13 @@ class FormContainer extends Component {
   handleLocation(event) {
     this.setState({ location: event.target.value });
   }
-  handleStartDate(event) {
-    var date = event.target.value.split('-');
-    date = date[1] + '/' + date[2] + '/' + date[0];
+  handleStartDate(date) {
     this.setState({ startDate: date });
   }
   handleStartTime(event) {
     this.setState({ startTime: event.target.value });
   }
-  handleEndDate(event) {
-    var date = event.target.value.split('-');
-    date = date[1] + '/' + date[2] + '/' + date[0];
+  handleEndDate(date) {
     this.setState({ endDate: date });
   }
   handleEndTime(event) {
@@ -81,8 +78,8 @@ class FormContainer extends Component {
 
     const endpoint = 'https://api.hotwire.com/v1/search/car?apikey=jguzhrtaw6ucmu2sfnek24vn&format=JSONP',
           params =  '&dest=' + this.state.location +
-                    '&startdate=' + this.state.startDate +
-                    '&enddate=' + this.state.endDate +
+                    '&startdate=' + Moment(this.state.startDate).format('MM/DD/YYYY') +
+                    '&enddate=' + Moment(this.state.endDate).format('MM/DD/YYYY') +
                     '&pickuptime=' + this.state.startTime +
                     '&dropofftime=' + this.state.endTime;
 
@@ -99,7 +96,7 @@ class FormContainer extends Component {
 
   render() {
     return (
-      <form className="rentalSearch" onSubmit={this.handleFormSubmit}>
+      <form className="rentalSearch clearfix" onSubmit={this.handleFormSubmit}>
 
         <Location
           name={'location'}
@@ -111,7 +108,10 @@ class FormContainer extends Component {
           <label htmlFor="input__startDate" className="formGroup__label">Start Date and Time</label>
           <Date
             name={'startDate'}
-            changeFunction={this.handleStartDate} />
+            changeFunction={this.handleStartDate}
+            selectedDate={this.state.startDate}
+            minDate={Moment()}
+            maxDate={Moment().add(1, 'year')} />
           <Time
             name={'startTime'}
             options={this.state.timeOptions}
@@ -122,7 +122,10 @@ class FormContainer extends Component {
           <label htmlFor="input__endDate" className="formGroup__label">End Date and Time</label>
           <Date
             name={'endDate'}
-            changeFunction={this.handleEndDate} />
+            changeFunction={this.handleEndDate}
+            selectedDate={this.state.endDate}
+            minDate={this.state.startDate}
+            maxDate={Moment().add(1, 'year')} />
           <Time
             name={'endTime'}
             options={this.state.timeOptions}

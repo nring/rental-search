@@ -5,10 +5,10 @@ class ResultItem extends Component {
 
   render() {
     return (
-      <li className="resultItem">
-        <p>Daily Rate: {this.props.DailyRate} {this.props.CurrencyCode}</p>
-        <p>Total Price: {this.props.TotalPrice}</p>
-        <a href={this.props.DeepLink} target="_blank">Click to book!</a>
+      <li className="resultItem clearfix">
+        <div className="resultsItem__rate">Daily Rate: {this.props.DailyRate} {this.props.CurrencyCode}</div>
+        <div className="resultsItem__price">Total Price: {this.props.TotalPrice}</div>
+        <a className="resultsItem__book" href={this.props.DeepLink} target="_blank">Click to book!</a>
       </li>
     )
   }

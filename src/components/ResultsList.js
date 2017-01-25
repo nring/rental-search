@@ -14,18 +14,17 @@ class ResultsList extends Component {
 
     if (this.props.results && this.props.results.Result && this.props.results.Result.length) {
       items = this.props.results.Result;
-    } else if (this.props.results && this.props.results.Errors && this.props.results.Errors.length) {
-      errors = this.props.results.Errors;
-      // Handle errors
+    } else if (this.props.results && this.props.results.Errors && this.props.results.Errors) {
+      errors.push(this.props.results.Errors);
     }
 
     return (
       <ul className="resultsList">
-        {/*errors.map(error => {
+        {errors.map((error, i) => {
           return (
-            <Error />
-          )
-        })*/}
+            <li key={i} className="resultsItem--error">{error.Error.ErrorMessage}</li>
+          );
+        })}
         {items.map(item => {
           return (
             <ResultItem

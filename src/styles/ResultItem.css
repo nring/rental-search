@@ -7,3 +7,24 @@
 .resultItem:nth-child(odd){
   background:#efefef;
 }
+.resultsItem--error{
+  text-align:center;
+  color:red;
+  margin:2rem 0;
+}
+
+.resultsItem__rate{
+  width:30%;
+  float:left;
+  text-align:center;
+}
+.resultsItem__price{
+  width:30%;
+  float:left;
+  text-align:center;
+}
+.resultsItem__book{
+  width:40%;
+  float:left;
+  text-align:center;
+}
